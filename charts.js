@@ -1,3 +1,5 @@
+
+
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
@@ -90,7 +92,12 @@ function buildCharts(sample) {
     }];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-     title: "Top 10 Bacteria Cultures Found"
+     title: "Top 10 Bacteria Cultures Found",
+     paper_bgcolor: "black",
+     plot_bgcolor: "black",
+     font: {
+      color: '#FFCC99'
+    }
     };
     // 10. Use Plotly to plot the data with the layout. 
      Plotly.newPlot("bar", barData, barLayout);
@@ -105,10 +112,12 @@ function buildCharts(sample) {
     text: otuLabels,
     mode: "markers",
      marker: {
-       size: sampleValues,
+       size: sampleValues,//.forEach(value=>value * 100),
        color: otuIds,
-       colorscale: "Earth"
-      
+       colorscale: "Earth",
+       sizemode: 'area',
+       sizeref: 2.* (sampleValues[0])/(90.**2),
+       sizemin: 4
      }
   }];
 
@@ -116,8 +125,13 @@ function buildCharts(sample) {
   var bubbleLayout = {
       title: "Bacteria Cultures Per Sample",
       xaxis: {title: "OTU ID"},
-      automargin: true,
-      hovermode: "closest"
+      // automargin: true,
+      hovermode: "closest",
+      paper_bgcolor: "black",
+      plot_bgcolor: "black",
+      font: {
+        color: '#FFCC99'
+      }
   };
 
   // 3. Use Plotly to plot the data with the layout.
@@ -154,7 +168,6 @@ function buildCharts(sample) {
       title: {text: "<b> Belly Button Washing Frequency </b> <br></br> Scrubs Per Week"},
       gauge: {
         axis: {range: [null,10], dtick: "2"},
-
         bar: {color: "black"},
         steps:[
           {range: [0, 2], color: "red"},
@@ -168,7 +181,12 @@ function buildCharts(sample) {
            
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = { 
-      automargin: true
+      automargin: true,
+      paper_bgcolor: "black",
+      plot_bgcolor: "black",
+      font: {
+        color: '#FFCC99'
+      }
      };
 
     // 6. Use Plotly to plot the gauge data and layout.
